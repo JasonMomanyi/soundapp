@@ -1,0 +1,14 @@
+# Node.js standard ignores
+
+# dependency directories
+node_modules/
+dist/
+
+# local env files
+.env
+
+# macOS files
+.DS_Store
+
+# Vite cache
+.vite/

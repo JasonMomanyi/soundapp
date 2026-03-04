@@ -44,13 +44,16 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -75,12 +78,15 @@ body {
 .glow-cyan {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.1);
 }
+
 .glow-magenta {
   box-shadow: 0 0 15px rgba(255, 0, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.1);
 }
+
 .glow-amber {
   box-shadow: 0 0 15px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.1);
 }
+
 .glow-green {
   box-shadow: 0 0 15px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
 }
@@ -126,6 +132,7 @@ body {
 .transport-btn.record {
   border-color: rgba(255, 100, 100, 0.3);
 }
+
 .transport-btn.record:hover,
 .transport-btn.record.active {
   border-color: #ff4444;
@@ -173,23 +180,77 @@ body {
 }
 
 /* Track colors */
-.seq-step.active[data-track="0"] { border-color: #ff6b6b; background: rgba(255, 107, 107, 0.2); }
-.seq-step.active[data-track="1"] { border-color: #ffa94d; background: rgba(255, 169, 77, 0.2); }
-.seq-step.active[data-track="2"] { border-color: #ffd43b; background: rgba(255, 212, 59, 0.2); }
-.seq-step.active[data-track="3"] { border-color: #69db7c; background: rgba(105, 219, 124, 0.2); }
-.seq-step.active[data-track="4"] { border-color: #74c0fc; background: rgba(116, 192, 252, 0.2); }
-.seq-step.active[data-track="5"] { border-color: #b197fc; background: rgba(177, 151, 252, 0.2); }
-.seq-step.active[data-track="6"] { border-color: #f783ac; background: rgba(247, 131, 172, 0.2); }
-.seq-step.active[data-track="7"] { border-color: var(--neon-cyan); background: rgba(0, 255, 255, 0.15); }
+.seq-step.active[data-track="0"] {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.2);
+}
 
-.seq-step.playing[data-track="0"] { box-shadow: 0 0 12px rgba(255, 107, 107, 0.5); }
-.seq-step.playing[data-track="1"] { box-shadow: 0 0 12px rgba(255, 169, 77, 0.5); }
-.seq-step.playing[data-track="2"] { box-shadow: 0 0 12px rgba(255, 212, 59, 0.5); }
-.seq-step.playing[data-track="3"] { box-shadow: 0 0 12px rgba(105, 219, 124, 0.5); }
-.seq-step.playing[data-track="4"] { box-shadow: 0 0 12px rgba(116, 192, 252, 0.5); }
-.seq-step.playing[data-track="5"] { box-shadow: 0 0 12px rgba(177, 151, 252, 0.5); }
-.seq-step.playing[data-track="6"] { box-shadow: 0 0 12px rgba(247, 131, 172, 0.5); }
-.seq-step.playing[data-track="7"] { box-shadow: 0 0 12px rgba(0, 255, 255, 0.5); }
+.seq-step.active[data-track="1"] {
+  border-color: #ffa94d;
+  background: rgba(255, 169, 77, 0.2);
+}
+
+.seq-step.active[data-track="2"] {
+  border-color: #ffd43b;
+  background: rgba(255, 212, 59, 0.2);
+}
+
+.seq-step.active[data-track="3"] {
+  border-color: #69db7c;
+  background: rgba(105, 219, 124, 0.2);
+}
+
+.seq-step.active[data-track="4"] {
+  border-color: #74c0fc;
+  background: rgba(116, 192, 252, 0.2);
+}
+
+.seq-step.active[data-track="5"] {
+  border-color: #b197fc;
+  background: rgba(177, 151, 252, 0.2);
+}
+
+.seq-step.active[data-track="6"] {
+  border-color: #f783ac;
+  background: rgba(247, 131, 172, 0.2);
+}
+
+.seq-step.active[data-track="7"] {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.15);
+}
+
+.seq-step.playing[data-track="0"] {
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.5);
+}
+
+.seq-step.playing[data-track="1"] {
+  box-shadow: 0 0 12px rgba(255, 169, 77, 0.5);
+}
+
+.seq-step.playing[data-track="2"] {
+  box-shadow: 0 0 12px rgba(255, 212, 59, 0.5);
+}
+
+.seq-step.playing[data-track="3"] {
+  box-shadow: 0 0 12px rgba(105, 219, 124, 0.5);
+}
+
+.seq-step.playing[data-track="4"] {
+  box-shadow: 0 0 12px rgba(116, 192, 252, 0.5);
+}
+
+.seq-step.playing[data-track="5"] {
+  box-shadow: 0 0 12px rgba(177, 151, 252, 0.5);
+}
+
+.seq-step.playing[data-track="6"] {
+  box-shadow: 0 0 12px rgba(247, 131, 172, 0.5);
+}
+
+.seq-step.playing[data-track="7"] {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
 
 /* ───────────────── Mixer ───────────────── */
 .mixer-fader {
@@ -244,6 +305,7 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
   transition: transform 0.15s ease;
 }
+
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
@@ -332,7 +394,7 @@ input[type="range"]::-moz-range-thumb {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: conic-gradient(from 220deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%);
+  background: conic-gradient(from 220deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.02) 100%);
   border: 2px solid rgba(255, 255, 255, 0.08);
   position: relative;
   cursor: pointer;
@@ -429,7 +491,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ───────────────── Mute / Solo ───────────────── */
-.btn-mute, .btn-solo {
+.btn-mute,
+.btn-solo {
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -444,8 +507,13 @@ input[type="range"]::-moz-range-thumb {
   transition: all 0.15s ease;
 }
 
-.btn-mute { color: rgba(255, 100, 100, 0.4); }
-.btn-solo { color: rgba(255, 193, 7, 0.4); }
+.btn-mute {
+  color: rgba(255, 100, 100, 0.4);
+}
+
+.btn-solo {
+  color: rgba(255, 193, 7, 0.4);
+}
 
 .btn-mute.active {
   color: #ff4444;
@@ -524,14 +592,398 @@ input[type="range"]::-moz-range-thumb {
   border-bottom-color: var(--neon-cyan);
 }
 
-/* ───────────────── Responsive ───────────────── */
-@media (max-width: 768px) {
-  .seq-step {
-    min-width: 20px;
-    min-height: 20px;
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Tablet  ≤ 1024px
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .nav-tab {
+    padding: 8px 14px;
+    font-size: 0.72rem;
   }
+
+  .seq-step {
+    min-width: 26px;
+    min-height: 26px;
+  }
+
+  .transport-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Mobile  ≤ 768px
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Body / Root ─────────────────────────────── */
+  body {
+    overflow: hidden;
+    /* support notch / dynamic island */
+    padding-top: env(safe-area-inset-top);
+  }
+
+  #app {
+    height: 100dvh;
+    /* dynamic viewport height (no browser chrome jump) */
+  }
+
+  /* ── App header: hide logo text, tighten ─────── */
+  .app-header-logo-text {
+    display: none;
+  }
+
+  .app-header {
+    padding: 0 8px;
+  }
+
+  /* ── Main content area ────────────────────────── */
+  .app-main {
+    /* Remove side visualizer on mobile — integrated into panel flow instead */
+    flex-direction: column !important;
+  }
+
+  .app-viz-sidebar {
+    display: none !important;
+    /* hidden on mobile */
+  }
+
+  /* Mobile mini visualizer strip (injected by app.js) */
+  .mobile-viz-strip {
+    display: block;
+    height: 56px;
+    flex-shrink: 0;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .mobile-viz-strip canvas {
+    width: 100% !important;
+    height: 56px !important;
+  }
+
+  /* ── Nav tabs — horizontal scrollable strip ──── */
+  .nav-tabs-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 2px !important;
+    padding: 0 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-tabs-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-tab {
+    padding: 10px 14px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Transport bar — compact single row ──────── */
+  .transport-bar {
+    padding: 8px 12px !important;
+  }
+
+  .transport-full-row {
+    display: none !important;
+  }
+
+  /* hide swing/step dots on mobile */
+  .transport-mobile-row {
+    display: flex !important;
+  }
+
+  /* show mobile compact row */
+
+  .transport-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .transport-bpm-input {
+    width: 52px !important;
+    font-size: 1.1rem !important;
+  }
+
+  /* ── Panel content — full width, scrollable ──── */
+  .panel-content {
+    padding: 12px 10px !important;
+  }
+
+  /* ── Sequencer grid ───────────────────────────── */
+  .seq-step {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 28px;
+    border-radius: 4px;
+  }
+
+  .seq-grid {
+    gap: 3px !important;
+  }
+
+  /* Track name labels narrower */
+  .seq-track-label {
+    width: 36px !important;
+    font-size: 0.55rem !important;
+  }
+
+  /* Track action buttons smaller */
+  .seq-track-actions {
+    gap: 2px !important;
+  }
+
+  .seq-track-actions button {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.5rem !important;
+  }
+
+  /* ── Mixer — horizontal card scroll ─────────── */
+  .mixer-tracks-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+
+  .mixer-tracks-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mixer-channel {
+    min-width: 68px !important;
+    flex-shrink: 0;
+  }
+
+  .mixer-fader {
+    height: 90px !important;
+  }
+
+  .vu-meter {
+    height: 60px !important;
+  }
+
+  /* ── Effects panel — vertical stack ─────────── */
+  .effects-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .effect-section {
+    padding: 12px !important;
+  }
+
+  /* ── EQ sliders ─────────────────────────────── */
+  #eq-bands {
+    gap: 0 !important;
+  }
+
+  .eq-slider {
+    height: 90px !important;
+  }
+
+  /* ── Sample pads larger tap target ──────────── */
+  .pad-btn {
+    min-height: 68px;
+  }
+
+  /* ── Keyboard — scrollable, larger keys ──────── */
+  .keyboard-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .keyboard-scroll-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .piano-key.white {
+    width: 38px !important;
+    height: 110px !important;
+  }
+
+  .piano-key.black {
+    width: 24px !important;
+    height: 68px !important;
+  }
+
+  /* ── Presets — 2-col grid ───────────────────── */
+  .preset-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .preset-card {
+    padding: 10px 12px !important;
+  }
+
+  /* ── Demo song cards — stack ─────────────────── */
+  #song-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Demo detail — single column ─────────────── */
+  .demo-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Glass panels — tighter ──────────────────── */
+  .glass-panel {
+    border-radius: 12px;
+  }
+
+  .glass-panel-sm {
+    border-radius: 8px;
+  }
+
+  /* ── Mute/Solo buttons — slightly larger ─────── */
+  .btn-mute,
+  .btn-solo {
+    width: 28px;
+    height: 28px;
+    font-size: 0.65rem;
+  }
+
+  /* ── Tab-btn presets ─────────────────────────── */
+  .tab-btn {
+    padding: 6px 12px;
+    font-size: 0.68rem;
+  }
+
+  /* ── Range slider thumb — bigger for touch ───── */
+  input[type="range"]::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Small Phone  ≤ 480px
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .nav-tab {
+    padding: 9px 11px;
+    font-size: 0.62rem;
+  }
+
+  /* Sequencer — make steps as small as possible */
+  .seq-step {
+    height: 24px;
+  }
+
+  .seq-grid {
+    gap: 2px !important;
+  }
+
+  .seq-track-label {
+    width: 28px !important;
+    font-size: 0.48rem !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* Transport — tightest */
   .transport-btn {
     width: 36px;
     height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .transport-bpm-input {
+    width: 46px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Mixer channels tighter */
+  .mixer-channel {
+    min-width: 58px !important;
+  }
+
+  /* Keyboard keys thinner */
+  .piano-key.white {
+    width: 32px !important;
+    height: 100px !important;
+  }
+
+  .piano-key.black {
+    width: 20px !important;
+    height: 62px !important;
+  }
+
+  /* Pad grid 2x4 on tiny screens */
+  #pad-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .pad-btn {
+    min-height: 58px;
+  }
+
+  /* EQ slider even shorter */
+  .eq-slider {
+    height: 70px !important;
+  }
+
+  /* Demo detail always single col */
+  .demo-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOUCH — Remove hover effects that feel broken on touch
+   ═══════════════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+
+  .seq-step:hover,
+  .transport-btn:hover,
+  .btn-neon:hover,
+  .btn-icon:hover,
+  .tab-btn:hover,
+  .nav-tab:hover {
+    /* inherit base styles, don't show hover state */
+    background: inherit;
+    border-color: inherit;
+    color: inherit;
+    box-shadow: none;
+  }
+
+  /* Make active states stronger instead */
+  .seq-step:active {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+
+  .transport-btn:active {
+    opacity: 0.8;
+  }
+
+  .btn-neon:active {
+    opacity: 0.8;
+  }
+
+  .nav-tab:active {
+    opacity: 0.8;
+  }
+
+  .pad-btn:active {
+    opacity: 0.7;
+    transform: scale(0.96);
   }
 }

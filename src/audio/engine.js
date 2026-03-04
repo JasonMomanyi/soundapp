@@ -1,6 +1,11 @@
 import * as Tone from 'tone';
 import { state, TRACKS } from '../state/state.js';
 import { SYNTH_PRESETS } from './presets.js';
+import { EQ8Band } from './equalizer.js';
+import { samplePlayer } from './sampler.js';
+
+// Shared EQ instance — exported so the EQ panel can reference it
+export const eq = new EQ8Band();
 
 /**
  * Core audio engine — wraps Tone.js
@@ -17,6 +22,8 @@ class AudioEngine {
         this._sequence = null;
         this._effects = {};
         this._initialized = false;
+        this._eq = eq;
+        this._eqInput = null;
 
         // Song mode state
         this._songMode = false;
@@ -39,12 +46,19 @@ class AudioEngine {
         this._masterChannel.connect(this._analyzer);
         this._masterChannel.connect(this._fft);
 
+        // EQ sits between instruments and master channel
+        const eqInput = this._eq.build(this._masterChannel);
+        this._eqInput = eqInput;
+
+        // Begin loading samples (non-blocking)
+        samplePlayer.init(eqInput).catch(console.warn);
+
         this._effects = {
-            reverb: new Tone.Reverb({ decay: 2.0, wet: 0 }).connect(this._masterChannel),
-            delay: new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.4, wet: 0 }).connect(this._masterChannel),
-            distortion: new Tone.Distortion({ distortion: 0.4, wet: 0 }).connect(this._masterChannel),
-            filter: new Tone.Filter({ frequency: 2000, type: 'lowpass', Q: 1 }).connect(this._masterChannel),
-            chorus: new Tone.Chorus({ frequency: 1.5, depth: 0.7, wet: 0 }).connect(this._masterChannel),
+            reverb: new Tone.Reverb({ decay: 2.0, wet: 0 }).connect(eqInput),
+            delay: new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.4, wet: 0 }).connect(eqInput),
+            distortion: new Tone.Distortion({ distortion: 0.4, wet: 0 }).connect(eqInput),
+            filter: new Tone.Filter({ frequency: 2000, type: 'lowpass', Q: 1 }).connect(eqInput),
+            chorus: new Tone.Chorus({ frequency: 1.5, depth: 0.7, wet: 0 }).connect(eqInput),
         };
 
         await this._effects.reverb.ready;
@@ -105,7 +119,8 @@ class AudioEngine {
                 mute: mixer[i].muted,
             });
             instr[track.instrument].connect(ch);
-            ch.connect(this._effects.filter);
+            // Route: channel → EQ input → master (EQ was already connected to master)
+            ch.connect(this._eqInput || this._masterChannel);
             return ch;
         });
 
@@ -161,16 +176,16 @@ class AudioEngine {
 
         switch (name) {
             case 'kick':
-                i.kick.triggerAttackRelease('C1', '8n', time);
+                if (!samplePlayer.trigger('kick', time)) i.kick.triggerAttackRelease('C1', '8n', time);
                 break;
             case 'snare':
-                i.snare.triggerAttackRelease('8n', time);
+                if (!samplePlayer.trigger('snare', time)) i.snare.triggerAttackRelease('8n', time);
                 break;
             case 'hihat':
-                i.hihat.triggerAttackRelease('32n', time);
+                if (!samplePlayer.trigger('hihat', time)) i.hihat.triggerAttackRelease('32n', time);
                 break;
             case 'clap':
-                i.clap.triggerAttackRelease('8n', time);
+                if (!samplePlayer.trigger('clap', time)) i.clap.triggerAttackRelease('8n', time);
                 break;
             case 'bass': {
                 const note = getNote('bass', 'C2');

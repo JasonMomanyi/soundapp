@@ -1,0 +1,537 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────── Root Variables ───────────────── */
+:root {
+  --neon-cyan: #00FFFF;
+  --neon-magenta: #FF00FF;
+  --neon-amber: #FFC107;
+  --neon-green: #39FF14;
+  --neon-pink: #FF6EC7;
+  --surface-900: #0f0d1a;
+  --surface-850: #171525;
+  --surface-800: #1e1b2e;
+  --glass-bg: rgba(30, 27, 46, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.06);
+}
+
+/* ───────────────── Base ───────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--surface-900);
+  color: #e2e8f0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───────────────── Scrollbar ───────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ───────────────── Glass Panel ───────────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glass-panel-sm {
+  background: rgba(30, 27, 46, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+}
+
+/* ───────────────── Neon Glow ───────────────── */
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.1);
+}
+.glow-magenta {
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.1);
+}
+.glow-amber {
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.1);
+}
+.glow-green {
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+/* ───────────────── Transport Bar ───────────────── */
+.transport-bar {
+  background: linear-gradient(180deg, rgba(30, 27, 46, 0.95) 0%, rgba(15, 13, 26, 0.98) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+}
+
+.transport-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.transport-btn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.transport-btn.active {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.transport-btn.record {
+  border-color: rgba(255, 100, 100, 0.3);
+}
+.transport-btn.record:hover,
+.transport-btn.record.active {
+  border-color: #ff4444;
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+}
+
+/* ───────────────── Sequencer ───────────────── */
+.seq-grid {
+  display: grid;
+  gap: 4px;
+}
+
+.seq-step {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  position: relative;
+  min-width: 28px;
+  min-height: 28px;
+}
+
+.seq-step:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.seq-step.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.15);
+  animation: step_active 0.15s ease-out;
+}
+
+.seq-step.playing {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+.seq-step.beat-marker {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Track colors */
+.seq-step.active[data-track="0"] { border-color: #ff6b6b; background: rgba(255, 107, 107, 0.2); }
+.seq-step.active[data-track="1"] { border-color: #ffa94d; background: rgba(255, 169, 77, 0.2); }
+.seq-step.active[data-track="2"] { border-color: #ffd43b; background: rgba(255, 212, 59, 0.2); }
+.seq-step.active[data-track="3"] { border-color: #69db7c; background: rgba(105, 219, 124, 0.2); }
+.seq-step.active[data-track="4"] { border-color: #74c0fc; background: rgba(116, 192, 252, 0.2); }
+.seq-step.active[data-track="5"] { border-color: #b197fc; background: rgba(177, 151, 252, 0.2); }
+.seq-step.active[data-track="6"] { border-color: #f783ac; background: rgba(247, 131, 172, 0.2); }
+.seq-step.active[data-track="7"] { border-color: var(--neon-cyan); background: rgba(0, 255, 255, 0.15); }
+
+.seq-step.playing[data-track="0"] { box-shadow: 0 0 12px rgba(255, 107, 107, 0.5); }
+.seq-step.playing[data-track="1"] { box-shadow: 0 0 12px rgba(255, 169, 77, 0.5); }
+.seq-step.playing[data-track="2"] { box-shadow: 0 0 12px rgba(255, 212, 59, 0.5); }
+.seq-step.playing[data-track="3"] { box-shadow: 0 0 12px rgba(105, 219, 124, 0.5); }
+.seq-step.playing[data-track="4"] { box-shadow: 0 0 12px rgba(116, 192, 252, 0.5); }
+.seq-step.playing[data-track="5"] { box-shadow: 0 0 12px rgba(177, 151, 252, 0.5); }
+.seq-step.playing[data-track="6"] { box-shadow: 0 0 12px rgba(247, 131, 172, 0.5); }
+.seq-step.playing[data-track="7"] { box-shadow: 0 0 12px rgba(0, 255, 255, 0.5); }
+
+/* ───────────────── Mixer ───────────────── */
+.mixer-fader {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  outline: none;
+  writing-mode: vertical-lr;
+  direction: rtl;
+}
+
+.mixer-fader::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--neon-cyan), #0088aa);
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+.mixer-fader::-moz-range-thumb {
+  width: 20px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--neon-cyan), #0088aa);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* ───────────────── Range Sliders ───────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  transition: transform 0.15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--neon-cyan);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+/* ───────────────── Keyboard ───────────────── */
+.piano-key {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.08s ease;
+  user-select: none;
+}
+
+.piano-key.white {
+  background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 6px 6px;
+  z-index: 1;
+}
+
+.piano-key.white:hover {
+  background: linear-gradient(180deg, #f0f8ff 0%, #d8e8f0 100%);
+}
+
+.piano-key.white:active,
+.piano-key.white.pressed {
+  background: linear-gradient(180deg, #c0e8ff 0%, #90d0f0 100%);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.piano-key.black {
+  background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 4px 4px;
+  z-index: 2;
+  position: absolute;
+}
+
+.piano-key.black:hover {
+  background: linear-gradient(180deg, #3a3a4a 0%, #1a1a2a 100%);
+}
+
+.piano-key.black:active,
+.piano-key.black.pressed {
+  background: linear-gradient(180deg, #2a3a5a 0%, #0a1a3a 100%);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* ───────────────── VU Meter ───────────────── */
+.vu-meter {
+  width: 6px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.vu-meter-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 3px;
+  transition: height 0.05s ease;
+  background: linear-gradient(0deg, var(--neon-green) 0%, var(--neon-amber) 60%, #ff4444 90%);
+}
+
+/* ───────────────── Visualizer Canvas ───────────────── */
+.visualizer-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* ───────────────── Effects Panel ───────────────── */
+.effect-knob {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: conic-gradient(from 220deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.effect-knob:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+}
+
+.effect-knob .knob-indicator {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 10px;
+  background: var(--neon-cyan);
+  border-radius: 2px;
+  transform-origin: bottom center;
+}
+
+/* ───────────────── Tabs ───────────────── */
+.tab-btn {
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tab-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tab-btn.active {
+  color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.06);
+  border-color: rgba(0, 255, 255, 0.15);
+}
+
+/* ───────────────── Buttons ───────────────── */
+.btn-neon {
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  background: rgba(0, 255, 255, 0.05);
+  color: var(--neon-cyan);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.btn-neon:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.8rem;
+}
+
+.btn-icon:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-icon.active {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.08);
+}
+
+/* ───────────────── Mute / Solo ───────────────── */
+.btn-mute, .btn-solo {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.15s ease;
+}
+
+.btn-mute { color: rgba(255, 100, 100, 0.4); }
+.btn-solo { color: rgba(255, 193, 7, 0.4); }
+
+.btn-mute.active {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.15);
+  border-color: rgba(255, 68, 68, 0.3);
+}
+
+.btn-solo.active {
+  color: var(--neon-amber);
+  background: rgba(255, 193, 7, 0.15);
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+/* ───────────────── Presets ───────────────── */
+.preset-card {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-card:hover {
+  border-color: rgba(0, 255, 255, 0.15);
+  background: rgba(0, 255, 255, 0.03);
+}
+
+.preset-card.active {
+  border-color: rgba(0, 255, 255, 0.3);
+  background: rgba(0, 255, 255, 0.06);
+}
+
+/* ───────────────── Tooltip ───────────────── */
+.tooltip {
+  position: absolute;
+  background: rgba(15, 13, 26, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+/* ───────────────── Header ───────────────── */
+.app-header {
+  background: linear-gradient(180deg, rgba(15, 13, 26, 0.98) 0%, rgba(15, 13, 26, 0.9) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+}
+
+/* ───────────────── Nav Tabs ───────────────── */
+.nav-tab {
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.nav-tab:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-tab.active {
+  color: var(--neon-cyan);
+  border-bottom-color: var(--neon-cyan);
+}
+
+/* ───────────────── Responsive ───────────────── */
+@media (max-width: 768px) {
+  .seq-step {
+    min-width: 20px;
+    min-height: 20px;
+  }
+  .transport-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
